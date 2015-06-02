@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+.item-list {
+    /*width: 405px !important;*/
+    padding: 0 10px;
+    li {
+        padding: 10px 0;
+        border-bottom: 1px solid $border-grey;
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+    .mod {
+        overflow: hidden;
+        padding: 2px 0;
+    }
+    .mod-sd {
+        float: left;
+        margin-right: 10px;
+        width: 80px;
+        height: 60px;
+        a {
+            display: block;
+            font-size: 0;
+            line-height: 0;
+        }
+    }
+    .mod-mn {
+        position: relative;
+        float: left;
+        width: calc(100% - 100px);
+        /*width: 290px;*/
+        height: 60px;
+    }
+    .mod-hd {
+        h5 {
+            position: relative;
+            line-height: 20px;
+        }
+        a {
+            display: block;
+            font-size: 1.6rem;
+        }
+    }
+    .mod-bd {
+        margin-top: 4px;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        &,
+        a {
+            color: #808080;
+        }
+        a {
+            display: block;
+            text-align: justify;
+        }
+    }
+    .mod-ft {
+        position: absolute;
+        right: 0;
+        bottom: 2px;
+        a {
+            font-size: 1.3rem;
+            color: #808080;
+        }
+    }
+    .title {
+        display: block;
+    }
+}
+.item-tag {
+    float: left;
+    padding: 4px;
+    margin-right: .5em;
+    line-height: 1;
+    font-size: 1.2rem;
+    background: darken($main-color, 5%);
+    color: #fff;
+}
+
+.sticky-tag {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+// article-list-box
+.article-list-box {
+    width: 100%;
+}
+.search-item-list {
+    /*width: 405px !important;*/
+    width: $info-box-width - 20px !important; // 330 - 10 * 2
+    li {
+        margin-right: 10px;
+    }
+    // 425 - 135
+    // .mod-mn {
+    //     width: 290px;
+    // }
+}
+
+// thread-item-list
+.thread-item-list {
+    padding-right: 20px;
+    .mod {
+        display: flex;
+        &-sd {
+            max-width: 80px;
+            min-width: 80px;
+        }
+        &-adm {
+            margin-left: 10px;
+            width: 50px;
+            height: 60px;
+        }
+    }
+}

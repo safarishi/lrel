@@ -1,0 +1,103 @@
+@charset "utf-8";
+@import "../chameleon/oniui-theme.scss";
+@import "../../inc/scheme";
+$uiname: "oni-slider";
+
+$ui-state-active-background-color: $main-color;
+
+.map-slider .#{$uiname} {
+    position: relative;
+    text-align: left;
+    @include inline-block();
+    width: 100%;
+    .oni-helper-hidden-accessible {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        border: 0 none;
+        margin: -1px;
+        padding: 0;
+        clip: rect(0px 0px 0px 0px);
+    }
+    .oni-corner-all {
+        @include border-radius(5px);
+    }
+    background: #fff;
+    border-radius: 6px;
+    .#{$uiname}-handle {
+        position: absolute;
+        display: block;
+        cursor: default;
+        height: 14px;
+        width: 14px;
+        line-height: 0px;
+        z-index: 2;
+        @include border-radius(7px);
+        font-size: 0px;
+        background: #fff;
+        cursor: grab;
+        box-shadow: 0 0 5px rgba(#000, .6);
+        z-index: 10;
+        &.oni-state-hover{
+        }
+        &.oni-state-active, &.oni-state-focus {
+        }
+    }
+    .#{$uiname}-range {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        line-height: 0px;
+        border: 0 none;
+        font-size: 0px;
+        background: $ui-state-active-background-color;
+        // @if($oinui-theme == dqiu) {
+        //     background: #afd9fc;
+        // }
+    }
+    &.#{$uiname}-vertical {
+        height: 100%;
+        width: 100%;
+        .#{$uiname}-handle {
+            left: -3px;
+            margin-bottom: -7px;
+            margin-left: 0;
+            margin-top: -7px;
+        }
+        .#{$uiname}-range {
+            left: 0;
+            width: 100%;
+            &.#{$uiname}-range-min {
+                bottom: 0;
+            }
+            &.#{$uiname}-range-max {
+                top: 0;
+            }
+        }
+    }
+    &.#{$uiname}-horizontal {
+        height: 8px;
+        .#{$uiname}-handle {
+            margin-left: -7px;
+            top: -3px;
+        }
+        .#{$uiname}-range {
+            height: 100%;
+            top: 0;
+            &.#{$uiname}-range-min {
+                left: 0;
+            }
+            &.#{$uiname}-range-max {
+                right: 0;
+            }
+        }
+    }
+    &.oni-state-disabled {
+        .#{$uiname}-handle, .#{$uiname}-range {
+            @if($oinui-theme == dqiu) {
+                background: #ccc;
+            }
+        }
+    }
+}

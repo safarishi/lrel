@@ -1,0 +1,91 @@
+$map: (
+    success: $alert-success-color, 
+    error: $alert-error-color,
+    warnning: $alert-warnning-color,
+    info: $alert-info-color
+);
+
+.prompt-dialog {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(#000, .3);
+    .oni-dialog-header {
+        line-height: 60px;
+        text-align: center;
+        font-size: 3rem;
+        color: #fff;
+    }
+    .oni-dialog-close {
+        position: absolute;
+        display: inline-block;
+        text-align: center;
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 60px;
+        color: #FFF;
+        right: 0;
+        padding: 0 15px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    .oni-dialog-footer {
+        display: none;
+    }
+    .oni-dialog-btns {
+        text-align: center;
+    }
+    button.oni-button {
+        height: auto;
+        width: 42%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin: 0 2% 30px;
+        border: 0;
+    }
+    .oni-button .oni-button-text {
+        font-size: 30px;
+    }
+    .oni-button.oni-corner-all {
+        border-radius: 0;
+    }
+    .oni-button.oni-state-default {
+        background-color: #a5a5a5;
+        color: #fff;
+        &:hover {
+            background-color: lighten(#a5a5a5, 5%);
+        }
+    }
+}
+.prompt-content {
+    text-align: center;
+    padding-bottom: 20px;
+    img {
+        margin: 20px 0;
+    }
+    p {
+        font-size: 20px;
+        line-height: 2;
+        color: #808080;
+    }
+}
+
+@each $item, $color in $map {
+    .prompt-#{$item} {
+        .oni-dialog-header {
+            background-color: $color;
+        }
+        .prompt-dialog {
+            .oni-button.oni-button-success {
+                background-color: $color;
+                &:hover {
+                    background-color: lighten($color, 5%);
+                }
+            }
+        }
+    }
+}
+
+.prompt-with-btns {
+    .oni-dialog-footer {
+        display: block;
+    }
+}

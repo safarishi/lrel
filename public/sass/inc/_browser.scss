@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+.browser-dialog {
+    position: absolute;
+    width: 860px;
+    height: 480px;
+    top: 0;
+    left: 50%;
+    margin-left: -430px;
+    top: 50%;
+    margin-top: -240px;
+    z-index: 9999;
+    background-color: #ebebeb;
+    color: #8e8e8e;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.browser-dialog .head {
+    line-height: 96px;
+    text-align: center;
+}
+.browser-dialog .head-type {
+    font-size: 30px;
+    color: #111111
+}
+.browser-dialog .llq-box {
+    background-color: #ffffff
+}
+.browser-dialog .llq-box-init {
+    margin: 0 auto;
+}
+.browser-dialog .title-type {
+    font-size: 18px;
+    line-height: 122px;
+    text-align: center;
+    color: #a5a5a5;
+}
+.browser-dialog .llq-tb {
+    padding: 0 18px 60px;
+}
+.browser-dialog .llq-ys {
+    display: inline-block;
+    width: 150px;
+    *display: inline;
+    *zoom: 1;
+    padding: 0 20px;
+}
+.browser-dialog .llq-type {
+    font-size: 14px;
+    color: #a68c8c;
+    text-align: center;
+    padding-top: 5px
+}
+.browser-dialog .llq-picture-ie {
+    background-image: url(../images/ie.png);
+    height: 82px;
+    width: 79px;
+    margin: 0 auto
+}
+.browser-dialog .llq-picture-chrome {
+    background-image: url(../images/chrome.png);
+    height: 82px;
+    width: 83px;
+    margin: 0 auto;
+}
+.browser-dialog .llq-picture-firefox {
+    background-image: url(../images/firefox.png);
+    height: 82px;
+    width: 83px;
+    margin: 0 auto
+}
+.browser-dialog .llq-picture-aoyou {
+    background-image: url(../images/maxthon.png);
+    height: 82px;
+    width: 79px;
+    margin: 0 auto
+}
+.browser-dialog .down-load {
+    height: 52px;
+    line-height: 52px;
+    width: 160px;
+    border: solid 1px #d7d7d7;
+    margin-top: 48px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.browser-dialog .down-type {
+    display: block;
+    text-align: left;
+    text-indent: 64px;
+    color: #666;
+    z-index: 1;
+    background: url(../images/download_browser.png) no-repeat 20px center;
+}

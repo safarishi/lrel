@@ -1,0 +1,48 @@
+.account-dialog {
+    .oni-dialog-inner .oni-dialog-header {
+        border-bottom: 0;
+    }
+    .oni-dialog-inner .oni-dialog-content {
+        padding: 17px 0 0 0;
+    }
+    .sign-out {
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        top: -8px;
+        transform: translateX(-50%);
+        padding: 6px 10px;
+        background: $main-red;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .reset-password {
+        width: 500px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+}
+
+.profile-box {
+    display: flex;
+    .mod-form,
+    .mod-avatar {
+        padding: 20px 40px 0;
+        box-sizing: border-box;
+    }
+    .mod-form {
+        width: 100%;
+    }
+    .mod-avatar {
+        min-width: 290px;
+        padding-left: 49px;
+        padding-right: 49px;
+        background: #eee;
+    }
+    .avatar-box {
+        text-align: center;
+        img {
+            border: 6px solid #fff;
+        }
+    }
+}

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  &.infinite {
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes flipInUp {
+  0% {
+    transform: perspective(600px) rotate3d(1, 0, 0, -90deg);
+    transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 20deg);
+    transition-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(600px) rotate3d(1, 0, 0, -10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 5deg);
+  }
+
+  100% {
+    transform: perspective(600px);
+  }
+}
+
+@keyframes flipInDown {
+  0% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 90deg);
+    transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(600px) rotate3d(1, 0, 0, -20deg);
+    transition-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(600px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  100% {
+    transform: perspective(600px);
+  }
+}
+
+@keyframes shakeBell {
+  0% {
+    transform: rotate(-20deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(20deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.flipInUp {
+  backface-visibility: visible !important;
+  animation-name: flipInUp;
+}
+
+.flipInDown {
+  backface-visibility: visible !important;
+  animation-name: flipInDown;
+}
+
+.shakeBell {
+  animation-name: shakeBell;
+  animation-duration: .6s;
+}

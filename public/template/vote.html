@@ -1,0 +1,16 @@
+<div class="vote-list" ms-controller="votelist">
+    <ul>
+        <li ms-repeat="voteData" class="vote-list-item">
+            <div class="vote-item">
+                <img ms-attr-src="{{el.thumbnail_url}}" width="228" height="140" alt="">
+                <p>{{el.item_subtitle}}</p>
+            </div>
+            <div class="vote-op">
+                <p>支持票数</p>
+                <strong>{{el.numbers}}</strong>
+                <a ms-if="!el.vote_state" class="btn-vote" ms-attr-data-id="{{el.id}}" ms-click="voteItem">+ 投票</a>
+                <a ms-if="el.vote_state" class="btn-vote btn-vote-disabled">已投票</a>
+            </div>
+        </li>
+    </ul>
+</div>

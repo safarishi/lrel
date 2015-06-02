@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <title>全心全意</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <style>
+        .write-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+    </style>
+    <script>
+        var IS_LOADING_CLEARED = false;
+        var IS_EARTH_LOADED = false;
+        var IS_LOADING_INSURE = false;
+        var UNLOADED_EARTH_PIC = TOTAL_EARTH_PIC = 6;
+        var LOADING_PROGRESS = 0;
+        var LOADING_COUNT = 0;
+        var LOADING_EARTH_WEIGHT = 50;
+        var LOADING_MODULE_WEIGHT = 50;
+
+        var APP = {
+            api_url: 'http://180.166.110.60/api',
+            client_id: '0IiNj6B4hJui25Ih',
+            client_secret: 'JhhvEXQmLRcLWzYpTODYGpJ7tWhanp3b',
+            api: function(path) {
+                return APP.api_url + path
+            }
+        }
+
+    </script>
+    <script src="bower_components/avalon/min/avalon.min.js" data-main="js/app-built"></script>
+    <script>
+        (function(){
+            var LOADING_INTERVEL = setInterval(function() {
+                LOADING_COUNT++;
+                var browserDialog = document.getElementById('browser-dialog')
+                if (LOADING_COUNT > 30 && browserDialog) {
+                    browserDialog.style.display = 'block'
+                }
+
+                var text = ''
+                for (var i = LOADING_COUNT % 3; i >= 0; i--) {
+                    text +='.'
+                };
+                var modules = avalon.modules
+                var total = Object.keys(modules).length
+                var loaded = 0
+                for (var prop in modules) {
+                    if (modules[prop].state == 4) {
+                        loaded++
+                    }
+                }
+                if (IS_LOADING_INSURE && LOADING_COUNT > 30) {
+                    clearInterval(LOADING_INTERVEL)
+                    IS_LOADING_CLEARED = true
+                    EARTH_LOADED_CALLBACK()
+                }
+                if (total - loaded < 2) {
+                    setTimeout(function() {
+                        if (Object.keys(avalon.modules).length == total) {
+                            if ((!IS_LOADING_CLEARED && IS_EARTH_LOADED)) {
+                                clearInterval(LOADING_INTERVEL)
+                                IS_LOADING_CLEARED = true
+                                setTimeout(function(){
+                                    EARTH_LOADED_CALLBACK()
+                                }, 3000)
+                            }
+                        };
+                    }, 1000)
+                }
+                var progress = loaded / total * LOADING_MODULE_WEIGHT + (TOTAL_EARTH_PIC - UNLOADED_EARTH_PIC) / TOTAL_EARTH_PIC * LOADING_EARTH_WEIGHT
+                document.getElementById('loading-progress').style.width = progress + '%'
+                document.getElementById('loading-progress-text').innerHTML = '加载中' + text
+            }, 500)
+
+            function EARTH_LOADED_CALLBACK() {
+                var doc = document;
+                avalon.vmodels.root.isLoadingCompleted = true
+                doc.querySelector('.page-is-loading').classList.remove('page-is-loading')
+                var hidded = doc.querySelectorAll('.global-hide')
+                for (var i = hidded.length - 1; i >= 0; i--) {
+                    hidded[i].classList.remove('global-hide')
+                }
+                document.getElementById('browser-dialog').style.display = 'none'
+            }
+
+            function CHECK_MODULES(all) {
+                var modules = avalon.modules
+                for (var prop in modules) {
+                    if (all) {
+                        console.log(prop, modules[prop].state)
+                    } else {
+                        if (modules[prop].state !== 4) {
+                            console.info(modules[prop].id, modules[prop].state)
+                        }
+                    }
+                }
+            }
+        })();
+    </script>
+</head>
+<body class="page-is-loading" ms-controller="root" ms-class-1="nav-user-is-open:toggleUserNav" ms-class-2="nav-menu-is-open:toggleMenuNav">
+    <div class="loading-progress-bar" ms-visible="!isLoadingCompleted">
+        <div class="loading-progress" id="loading-progress"></div>
+        <p id="loading-progress-text">加载中...</p>
+    </div>
+    <!-- 主内容 -->
+    <div class="global-hide global-wrap clearfix" ms-controller="map">
+        <aside class="nav-user" ms-controller="user" ms-include-src="'template-nav-user.html'"></aside>
+        <section class="main">
+
+            <div class="global-border global-border-top"></div>
+            <div class="global-border global-border-left"></div>
+            <div class="global-border global-border-right"></div>
+            <div class="global-border global-border-bottom"></div>
+
+            <header class="header global-opacity" ms-include-src="'template-header.html'"></header>
+            <section class="content">
+                <!-- 地图区域 -->
+                <div class="map-container" id="map-container" ms-on-mousewheel="wheelLevel">
+                    <div class="map-canvas-container" id="map-canvas-container"></div>
+                    <div class="map-ditu-wrapper" ms-visible="sliderValue > 0">
+                        <div ms-controller="ditu" class="map-ditu-container" id="map-ditu-container"></div>
+                    </div>
+                </div>
+                <!-- /地图区域 -->
+
+                <div ms-class="map-slider map-slider-dark global-opacity">
+                    <div class="map-level-decoration">
+                        <span class="maps-icons-people"></span>
+                    </div>
+                    <a class="map-level-control map-level-add" href="javascript:void(0)" ms-click="addLevel"><span class="maps-icons maps-icons-plus"></span></a>
+                    <div class="map-slider-bd">
+                        <input ms-widget="slider,mapLevel,$mapOpt" data-slider-orientation="vertical" data-slider-range="min">
+                        <ol class="map-slider-bar">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ol>
+                    </div>
+                    <a class="map-level-control" href="javascript:void(0)" ms-click="minusLevel"><span class="maps-icons maps-icons-minus"></span></a>
+                    <div class="map-level-decoration">
+                        <span class="maps-icons-earth"></span>
+                    </div>
+                </div>
+
+                <!-- <div class="map-mask">
+                </div> -->
+            </section>
+            <footer class="footer" ms-include-src="'template-footer.html'"></footer>
+        </section>
+        <aside class="nav-menu global-opacity" ms-include-src="'template-nav-menu.html'"></aside>
+    </div>
+    <!-- 注册登录 -->
+    <div class="global-hide light-dialog sign-dialog" ms-visible="isLoadingCompleted" ms-widget="dialog,signDialog,$SignDialogOpt" data-dialog-toggle="false" data-dialog-width="560"></div>
+    <!-- 在线规划 -->
+    <div class="global-hide planning" ms-controller="planning" ms-visible="toggleList||toggleDetail" style="left:500px;top:170px;">
+        <a href="#" class="close" ms-visible="!(!toggleList || toggleDetail)" ms-click="closePlanning">×</a>
+        <div class="planning-box" ms-visible="toggleList">
+            <ol class="planning-box-flex">
+                <li class="mod transform-box-wrap" ms-repeat="planList" ms-click="getPlanItem(el.id)" ms-attr-data-id={{el.id}}>
+                    <div class="transform-box">
+                        <h5 class="name ellipsis">{{el.title}}</h5>
+                        <div class="author">作者：{{el.author}}</div>
+                        <div class="floor">{{el.writing_height}}M</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <div class="planning-detail" ms-visible="toggleDetail">
+            <a href="javascript:void(0)" class="planning-detail-prev planning-detail-switcher" ms-click="handlePlan('prev')">
+                <span class="icons-sprite icons-plan-prev"></span>
+            </a>
+            <div class="planning-detail-box light-box">
+                <div class="light-box-hd">
+                    <a href="#" class="close" ms-click="handlePlanDetail(false)">×</a>
+                </div>
+                <div class="mod">
+                    <div class="mod-hd">
+                        <div class="planning-detail-hd">
+                            <div class="planning-detail-pic">
+                                <img ms-attr-src="{{thumbnail_url}}" width="195" height="145" alt="">
+                                <a href="#" class="zoom">
+                                    <span class="icons-sprite icons-zoom"></span>
+                                </a>
+                            </div>
+                            <div class="planning-detail-overview">
+                                <div class="title">{{title}}</div>
+                                <dl class="planning-detail-intro">
+                                    <dt>作者</dt>
+                                    <dd class="ellipsis">{{author}}</dd>
+                                    <dt>高度</dt>
+                                    <dd class="ellipsis">{{writing_height}}M</dd>
+                                    <dt>编号</dt>
+                                    <dd class="ellipsis">{{number}}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mod-bd">
+                        <div class="planning-detail-bd">
+                            <h5 class="title">简介：</h5>
+                            <div class="intro">{{description|sanitize|html}}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="article-box-tools">
+                    <a href="#"><span class="icons-sprite icons-thumb"></span></a>
+                    <a href="#"><span class="icons-sprite icons-comment"></span></a>
+                </div> -->
+            </div>
+            <a href="javascript:void(0)" class="planning-detail-next planning-detail-switcher" ms-click="handlePlan('next')">
+                <span class="icons-sprite icons-plan-next"></span>
+            </a>
+        </div>
+    </div>
+    <!-- /在线规划 -->
+    <!-- 浏览器提示 -->
+    <div id="browser-dialog" class="browser-dialog" style="display: none">
+        <div class="head">
+            <p class="head-type">提 示</p>
+        </div>
+        <div class="llq-box">
+            <div class="llq-box-init">
+                <div class="title">
+                    <p class="title-type">请确认是否使用以下浏览器访问，如果不是请先点击下载任意浏览器。</p>
+                </div>
+                <div class="llq-tb clearfix">
+                    <div class="llq-ys">
+                        <div class="llq-picture-chrome"></div>
+                        <div class="llq-type">Chrome</div>
+                        <div class="down-load">
+                            <a href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html" target="_blank" class="down-type">Chrome下载</a>
+                        </div>
+                    </div>
+                    <div class="llq-ys">
+                        <div class="llq-picture-firefox"></div>
+                        <div class="llq-type">FireFox</div>
+                        <div class="down-load">
+                            <a href="http://www.firefox.com.cn/download/" target="_blank" class="down-type">FireFox下载</a>
+                        </div>
+                    </div>
+                    <div class="llq-ys">
+                        <div class="llq-picture-aoyou"></div>
+                        <div class="llq-type">傲游</div>
+                        <div class="down-load">
+                            <a href="http://www.maxthon.cn/" target="_blank" class="down-type">傲游下载</a>
+                        </div>
+                    </div>
+                    <div class="llq-ys">
+                        <div class="llq-picture-ie"></div>
+                        <div class="llq-type">IE11</div>
+                        <div class="down-load">
+                            <a href="http://windows.microsoft.com/zh-cn/internet-explorer/ie-11-worldwide-languages" target="_blank" class="down-type">IE11下载</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 操作提示 -->
+    <div ms-controller="prompt" id="prompt" class="global-hide prompt" ms-class-1="prompt-{{promptType}}" ms-class-2="prompt-with-btns:showBtns">
+        <div class="prompt-dialog" ms-if="togglePrompt" ms-widget="dialog,promptDialog,$promptDialogOpt" data-dialog-toggle="true" data-dialog-width="664">
+        </div>
+    </div>
+    <script>
+        (function(){
+            var avalon = avalon || {}
+            var pf = (navigator.platform || "").toLowerCase(),
+                    ua = navigator.userAgent.toLowerCase(),
+                    s;
+            function toFixedVersion(ver, floatLength) {
+                ver = ("" + ver).replace(/_/g, ".");
+                floatLength = floatLength || 1;
+                ver = String(ver).split(".");
+                ver = ver[0] + "." + (ver[1] || "0");
+                ver = Number(ver).toFixed(floatLength);
+                return ver;
+            }
+
+            function updateProperty(target, name, ver) {
+                target = avalon[target]
+                target.name = name;
+                target.version = ver;
+                target[name] = ver;
+            }
+            var platform = avalon.platform = {
+                name: (window.orientation != undefined) ? 'iPod' : (pf.match(/mac|win|linux/i) || ['unknown'])[0],
+                version: 0,
+                iPod: 0,
+                iPad: 0,
+                iPhone: 0,
+                android: 0,
+                win: 0,
+                linux: 0,
+                mac: 0
+            };
+            (s = ua.match(/windows ([\d.]+)/)) ? updateProperty("platform", "win", toFixedVersion(s[1])) :
+                    (s = ua.match(/windows nt ([\d.]+)/)) ? updateProperty("platform", "win", toFixedVersion(s[1])) :
+                    (s = ua.match(/linux ([\d.]+)/)) ? updateProperty("platform", "linux", toFixedVersion(s[1])) :
+                    (s = ua.match(/mac ([\d.]+)/)) ? updateProperty("platform", "mac", toFixedVersion(s[1])) :
+                    (s = ua.match(/ipod ([\d.]+)/)) ? updateProperty("platform", "iPod", toFixedVersion(s[1])) :
+                    (s = ua.match(/ipad[\D]*os ([\d_]+)/)) ? updateProperty("platform", "iPad", toFixedVersion(s[1])) :
+                    (s = ua.match(/iphone ([\d.]+)/)) ? updateProperty("platform", "iPhone", toFixedVersion(s[1])) :
+                    (s = ua.match(/android ([\d.]+)/)) ? updateProperty("platform", "android", toFixedVersion(s[1])) : 0;
+            var browser = avalon.browser = {
+                name: "unknown",
+                version: 0,
+                ie: 0,
+                firefox: 0,
+                chrome: 0,
+                opera: 0,
+                safari: 0,
+                mobileSafari: 0,
+                adobeAir: 0
+            };
+            (s = ua.match(/trident.*; rv\:([\d.]+)/)) ? updateProperty("browser", "ie", toFixedVersion(s[1])) : 
+                    (s = ua.match(/msie ([\d.]+)/)) ? updateProperty("browser", "ie", toFixedVersion(s[1])) :
+                    (s = ua.match(/firefox\/([\d.]+)/)) ? updateProperty("browser", "firefox", toFixedVersion(s[1])) :
+                    (s = ua.match(/chrome\/([\d.]+)/)) ? updateProperty("browser", "chrome", toFixedVersion(s[1])) :
+                    (s = ua.match(/opera.([\d.]+)/)) ? updateProperty("browser", "opera", toFixedVersion(s[1])) :
+                    (s = ua.match(/adobeair\/([\d.]+)/)) ? updateProperty("browser", "adobeAir", toFixedVersion(s[1])) :
+                    (s = ua.match(/version\/([\d.]+).*safari/)) ? updateProperty("browser", "safari", toFixedVersion(s[1])) : 0;
+            (s = ua.match(/version\/([\d.]+).*mobile.*safari/)) ? updateProperty("browser", "mobileSafari", toFixedVersion(s[1])) : 0;
+            if (platform.iPad) {
+                updateProperty("browser", 'mobileSafari', '0.0');
+            }
+
+            if (browser.ie) {
+                if (!document.documentMode) {
+                    document.documentMode = Math.floor(browser.ie)
+                } else if (document.documentMode !== Math.floor(browser.ie)) {
+                    updateProperty("browser", "ie", toFixedVersion(document.documentMode))
+                }
+            }
+            avalon.engine = {
+                name: 'unknown',
+                version: 0,
+                trident: 0,
+                gecko: 0,
+                webkit: 0,
+                presto: 0
+            };
+            (s = ua.match(/trident\/([\d.]+)/)) ? updateProperty("engine", "trident", toFixedVersion(s[1])) :
+                    (s = ua.match(/gecko\/([\d.]+)/)) ? updateProperty("engine", "gecko", toFixedVersion(s[1])) :
+                    (s = ua.match(/applewebkit\/([\d.]+)/)) ? updateProperty("engine", "webkit", toFixedVersion(s[1])) :
+                    (s = ua.match(/presto\/([\d.]+)/)) ? updateProperty("engine", "presto", toFixedVersion(s[1])) : 0;
+            if (avalon.browser.ie) {
+                if (avalon.browser.ie == 6) {
+                    updateProperty("engine", "trident", toFixedVersion("4"))
+                } else if (browser.ie == 7 || browser.ie == 8) {
+                    updateProperty("engine", "trident", toFixedVersion("5"))
+                }
+            }
+
+            var browserName = avalon.browser.name
+            var browserVersion = avalon.browser.version
+            var engineName = avalon.engine.name
+            var engineVersion = avalon.engine.version
+            var notSupportedIE = engineName === 'trident' && parseInt(browserVersion, 10) < 11
+            var notSupportedFX = browserName === 'firefox' && parseInt(browserVersion, 10) < 16
+            var notSupportedChrome = browserName === 'chrome' && parseInt(browserVersion, 10) < 21
+            var notSupportedSafari = browserName === 'safari' && parseFloat(browserVersion, 10) < 6.1
+            var notSupportedOpera = browserName === 'opera' && parseInt(browserVersion, 10) < 15
+            var isNotSupported = notSupportedIE || notSupportedFX || notSupportedChrome || notSupportedSafari || notSupportedOpera
+            if (isNotSupported) {
+                document.getElementById('browser-dialog').style.display = 'block'
+            }
+        })();
+    </script>
+</body>
+</html>

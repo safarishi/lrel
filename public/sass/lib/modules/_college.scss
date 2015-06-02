@@ -1,0 +1,247 @@
+@charset "UTF-8";
+
+.college {
+    &-is-open {
+        display: flex;
+    }
+    display: none;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(#000, .3);
+}
+.college-chat {
+    flex-basis: 320px;
+    height: auto;
+}
+.college-box {
+    position: relative;
+    flex-basis: calc(100% - 320px);
+    padding: 24px 60px 60px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: $z-foot + 1;
+    &-hd {
+        margin-bottom: 24px;
+        h1 {
+            font-size: 2.4rem;
+            color: $main-color;
+        }
+        small {
+            padding-left: .5em;
+            font-size: 1.6rem;
+            color: #8a8a8a;
+        }
+    }
+    &-bd {
+        position: relative;
+        height: calc(100% - 48px)
+    }
+}
+.college-overview {
+    position: absolute;
+    height: 64px;
+    top: -22px;
+    right: 0;
+    font-size: 16px;
+    line-height: 2;
+    &,
+    a {
+        color: #8a8a8a;
+    }
+    .icons-bell {
+        vertical-align: text-bottom;
+    }
+    .apply-num {
+        color: $main-red;
+    }
+}
+.college-box,
+.college-tab,
+.college-tab .oni-tab,
+.college-thread-list,
+.college-thread {
+    height: 100%;
+}
+.college-tab {
+    .oni-tab {
+        position: relative;
+    }
+    .oni-tab-panel-container {
+        width: calc(100% + 344px);
+        height: calc(100% - 40px);
+        border: 1px solid #e1e1e1;
+        overflow-y: auto;
+    }
+}
+
+// college-thread
+.college-thread {
+    position: relative;
+    &-inner {
+        padding: 20px;
+    }
+    &-hd {
+        display: flex;
+        justify-content: space-between;
+        height: 32px;
+        margin-bottom: 20px;
+        h3 {
+            margin-left: 14px;
+            font-size: 2rem;
+            color: $main-black;
+        }
+        a {
+            display: inline-block;
+            font-size: 1.6rem;
+            line-height: 2;
+            padding: 0 18px;
+            color: #fff;
+            &.thread-sticky {
+                padding: 2px 10px;
+                line-height: 2;
+            }
+        }
+        &-left {
+            display: flex;
+            align-items: center;
+        }
+        &-left a {
+            background: #494949;
+        }
+        &-right {
+            display: flex;
+            align-items: center;
+            a {
+                background: $main-color;
+            }
+        }
+    }
+    &-bd {
+        height: calc(100% - 82px - 40px);
+        border: 1px solid #e1e1e1;
+        overflow-y: auto;
+    }
+    &-ft {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+    }
+}
+
+a.thread-sticky {
+    font-size: 14px;
+    padding: 12px 8px;
+    line-height: 1.4em;
+    box-sizing: border-box;
+    background-color: $main-blue;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background-color: $dark-blue;
+    }
+    @at-root .college-thread-hd-right & {
+        margin-right: 10px;
+    }
+    .icons-sticky {
+        vertical-align: text-bottom;
+    }
+    &-vertical {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        @include link-colors(#fff, #fff);
+        .icons-sticky {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    @at-root &-cancel {
+        background-color: #e1e1e1;
+        @include link-colors($main-black, $main-black);
+        &:hover {
+            background-color: #c6c6c6;
+        }
+    }
+}
+
+.college-apply {
+    height: 100%;
+    line-height: 1.6;
+    &-bd {
+        height: calc(100% - 48px);
+    }
+    &-date {
+        line-height: 2;
+        color: #636262;
+    }
+    &-item {
+        display: flex;
+        align-items: center;
+        padding: 14px;
+        margin-bottom: 12px;
+        border: 1px solid #eaeaea;
+        border-radius: 4px;
+        img {
+            min-width: 60px;
+        }
+    }
+    &-info {
+        width: 100%;
+        padding: 0 10px;
+        align-self: flex-start;
+        .username {
+            font-size: 14px;
+            color: $main-blue;
+        }
+        .message span {
+            color: #808080;
+        }
+    }
+    &-op {
+        min-width: 100px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 14px;
+    }
+    &-btns {
+        position: relative;
+        display: flex;
+        a {
+            display: block;
+            width: 50%;
+            margin: 0 1px;
+            transition: all .3s ease-in-out;
+            &:hover {
+                position: absolute;
+                width: 100%;
+            }
+            &.approve {
+                background: $main-blue;
+                color: #fff;
+                &:hover {
+                    background: lighten($main-blue, 5%);
+                    left: 0;
+                }
+            }
+            &.reject {
+                background: #e1e1e1;
+                color: #111;
+                &:hover {
+                    background: lighten(#e1e1e1, 5%);
+                    right: 0;
+                }
+            }
+        }
+    }
+}
+
+// college thread pager
+.college-thread-list .oni-pager {
+    position: absolute;
+    bottom: -44px;
+    width: 100%;
+    text-align: center;
+}

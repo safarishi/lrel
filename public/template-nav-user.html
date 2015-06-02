@@ -1,0 +1,45 @@
+<section class="aside-profile">
+    <img ms-attr-src="{{avatar}}" class="aside-profile-avatar" width="60" height="60" alt="">
+    <div class="aside-profile-info">
+        <p>{{username}}</p>
+        <a href="#" ms-click="showUserInfo">个人信息</a>
+        <a href="#" class="sign-out" ms-click="userSignOut">退出</a>
+    </div>
+    <!-- <a href="#" class="close" ms-click="closeUserNav">×</a> -->
+</section>
+<nav class="nav-user-tabs">
+    <ul>
+        <!-- <li>
+            <a href="#">线上办公</a>
+            <ul>
+                <li><a href="#">公文管理<span class="todo-bubble">3</span></a></li>
+                <li><a href="#">项目管理</a></li>
+                <li><a href="#">会议查询<span class="todo-bubble">5</span></a></li>
+                <li><a href="#">经营管理</a></li>
+                <li><a href="#">档案管理</a></li>
+                <li><a href="#">资料查询</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">用户管理</a>
+            <ul>
+                <li><a href="#">我的收藏<span class="todo-bubble">3</span></a></li>
+                <li><a href="#">我的方案</a></li>
+                <li><a href="#">我的交易<span class="todo-bubble">5</span></a></li>
+                <li><a href="#">我的海宝</a></li>
+                <li><a href="#">账号设置</a></li>
+            </ul>
+        </li> -->
+        <li>
+            <a href="#">用户管理</a>
+            <ul>
+                <li><a href="#" ms-click="handleAuthDialog">院内认证</a></li>
+                <li><a href="#" ms-click="handleAccountDialog">账号设置</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<dl class="user-credit" ms-controller="credit" ms-if="toggleCredit">
+    <dt>{{title}}</dt>
+    <dd>{{value}}</dd>
+</dl>

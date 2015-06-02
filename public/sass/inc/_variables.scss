@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+@import "scheme";
+
+// support
+$debug-browser-support: false;
+$support-for-ie: false;
+$supported-browsers: reject(browsers(), ie);
+
+// compass
+$icons-sprite-dimensions: true;
+$icons-layout: "smart";
+$icons-map: sprite-map("icons/*.png");
+
+$ft-icons-sprite-dimensions: true;
+$ft-icons-layout: "smart";
+$ft-icons-map: sprite-map("ft-icons/*.png");
+
+$maps-icons-sprite-dimensions: true;
+$maps-icons-layout: "smart";
+$maps-icons-map: sprite-map("maps-icons/*.png");
+
+// layout
+$default-ico-size: 40px;
+$container-width: 1200px;
+$page-min-height: 700px;
+$nav-menu-width: 264px;
+$nav-user-width: 272px;
+$info-box-width: 330px;
+
+// z-index
+$z-main: 20; // main, content
+$z-bar: 50; // header
+$z-aside: 80; // nav-user
+$z-menu: 120; //nav-menu
+$z-foot: 50; // footer

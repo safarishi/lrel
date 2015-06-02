@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+@import "mixins/visually-hidden";
+@import "mixins/clearfix";
+
+.visually-hidden {
+    @include visually-hidden;
+}
+
+.clearfix {
+    @include clearfix;
+}
+
+.has-notify {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    top: 5px;
+    right: 5px;
+    background: $main-red;
+    border-radius: 8px;
+}

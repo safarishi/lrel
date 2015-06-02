@@ -1,0 +1,143 @@
+<!-- 微大学窗口 -->
+<div class="college" id="college" ms-controller="college" ms-if="toggleCollege" ms-class="college-is-open:toggleCollege">
+    <div class="college-box light-box">
+        <div class="light-box-hd">
+            <a href="#" class="close" ms-click="handleCollege(false)">×</a>
+        </div>
+        <div class="college-box-hd">
+            <h1>{{cateName}}<small>{{cateDesc}}</small></h1>
+        </div>
+        <div class="college-box-bd">
+            <div class="college-thread-list" ms-if="toggleGroup">
+                <div class="college-overview">
+                    <p style="text-align:right;">{{groupThreadNum}} 篇文章</p>
+                    <p><a href="#" ms-if="isGroupAdmin" ms-click="handleApply(true)"><i class="icons-sprite icons-bell" ms-class="shakeBell animated infinite:groupApplyNum > 0"></i> 新申请 <span class="apply-num">{{groupApplyNum}}</span> / </a>在线 20 人 / {{groupMemberNum}} 人</p>
+                </div>
+                <div class="college-tab">
+                    <div ms-widget="tab,collegeTab,$collegeTabOpt">
+                    </div>
+                </div>
+                <div ms-widget="pager,collegeThreadPager,$collegePagerOpt"></div>
+            </div>
+            <div class="college-apply" ms-if="isGroupAdmin && toggleApply">
+                <div class="college-thread-hd">
+                    <div class="college-thread-hd-left">
+                        <a href="#" ms-click="handleApply(false)">返回列表</a>
+                        <h3>新申请</h3>
+                    </div>
+                </div>
+                <div class="college-thread-bd college-apply-bd" ms-on-scroll="scrollApplyList">
+                    <div class="college-thread-inner">
+                        <div class="college-apply-group" ms-repeat-dl="applyDateList">
+                            <div class="college-apply-date">{{dl}}</div>
+                            <div class="college-apply-item" ms-repeat-al="applyList[$index]">
+                                <img ms-attr-src="{{al.user_avatar}}" width="60" height="60">
+                                <div class="college-apply-info">
+                                    <p class="username">{{al.user_name}}</p>
+                                    <p class="email">{{al.user_email}}</p>
+                                    <p class="message"><span>留言：</span>{{al.reason}}</p>
+                                </div>
+                                <div class="college-apply-op" ms-attr-data-apply-idx="{{$index}}" ms-attr-data-outer-idx="$outer.$index" ms-attr-data-apply-id="{{al.id}}">
+                                    <div ms-if="al.status_flag == 1">已同意</div>
+                                    <div ms-if="al.status_flag == 0" class="college-apply-btns">
+                                        <a href="#" ms-click="requestApply(1)" class="approve">同意</a>
+                                        <a href="#" ms-click="requestApply(-1)" class="reject">拒绝</a>
+                                    </div>
+                                    <div ms-if="al.status_flag == -1">已拒绝</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="college-thread" ms-if="toggleThread">
+                <div class="college-thread-hd">
+                    <div class="college-thread-hd-left">
+                        <a href="#" ms-click="handleThread(false)">返回列表</a>
+                        <h3>夜读课堂</h3>
+                    </div>
+                    <div class="college-thread-hd-right">
+                        <div ms-controller="collegeThreadContent">
+                            <a href="#" class="thread-sticky thread-sticky-cancel thread-sticky-horizontal" ms-if="isGroupAdmin && isTop" ms-click="setThreadSticky(tid, false)">取消置顶</a>
+                            <a href="#" class="thread-sticky thread-sticky-horizontal" ms-if="isGroupAdmin && !isTop" ms-click="setThreadSticky(tid, true)"><span class="icons-sprite icons-sticky"></span> 置顶</a>
+                        </div>
+                        <a href="#" ms-click="handleThreadContent(true)" ms-if="toggleThreadComment">返回文章</a>
+                        <a href="#" ms-click="handleThreadContent(false)" ms-if="toggleThreadContent">{{threadCommentCount}} 条评论 | 查看</a>
+                    </div>
+                </div>
+                <div class="college-thread-bd">
+                    <div class="college-thread-inner">
+                        <!-- 帖子内容 -->
+                        <div class="college-thread-content" ms-controller="collegeThreadContent" ms-if="toggleThreadContent">
+                            <div class="thread-box">
+                                <div class="thread-box-hd">
+                                    <h4 class="title">{{title}}</h4>
+                                    <div class="info" ms-if="info">{{info}}</div>
+                                </div>
+                                <div class="thread-box-bd">{{content|sanitize|html}}</div>
+                            </div>
+                        </div>
+
+                        <!-- 帖子评论 -->
+                        <div class="college-thread-comment" ms-controller="collegeThreadComment" ms-if="toggleThreadComment">
+                            <div class="thread-comment-box comment-box">
+                                <div class="comment-list">
+                                    <ul>
+                                        <li class="mod" ms-repeat="commentData">
+                                            <a href="#" class="mod-sd"><img ms-attr-src="{{el.user_avatar}}" width="60" height="60" alt=""></a>
+                                            <div class="mod-mn">
+                                                <div class="mod-hd">
+                                                    <div class="align-left">{{el.username}}</div>
+                                                    <div class="align-right">{{el.created_at}}</div>
+                                                </div>
+                                                <div class="mod-bd">
+                                                    <div class="mod-bd-content">
+                                                        {{el.content|sanitize|html}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ms-if="isGroupAdmin" class="mod-ft comment-op">
+                                                <a href="#" ms-click="removeComment" ms-attr-data-id="{{el.id}}">删除该评论</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="college-thread-ft">
+                    <div class="comment-input">
+                        <form method="post" ms-submit="postThreadComment" class="comment-form">
+                            <input placeholder="您的评论" id="thread-comment-input" type="text">
+                            <button type="submit">评论</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 微大学聊天窗口 -->
+    <div class="college-chat chat-box main-box">
+        <div class="main-box-hd">
+            <h3 class="title">在线聊天</h3>
+            <div class="main-box-hd-tool">
+                <span class="icons-sprite icons-group"></span>
+            </div>
+        </div>
+        <div class="chat-box-bd">
+            <div class="chat">
+                    <!-- <div class="chat-item me">
+                        <div class="time">16:10</div>
+                    </div> -->
+            </div>
+            <div class="chat-editor" style="position:absolute; bottom: 20px;">
+                <form action="" class="chat-input" method="post">
+                    <textarea name="chat-text" class="chat-text" style="height: 20px; overflow: hidden;" placeholder="写消息"></textarea>
+                    <button class="chat-submit" type="submit">+</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /微大学聊天窗口 -->
+</div>

@@ -1,0 +1,36 @@
+<div class="sign-dialog-box">
+    <h3 class="title">用户注册</h3>
+    <form method="post" ms-submit="preventDefault" class="sign-form box-form" id="sign-up-form">
+        <div class="form-group">
+            <span class="icons-sprite icons-account"></span>
+            <input type="text" id="sign-up-email" placeholder="请输入邮箱作为网站账号">
+        </div>
+        <div class="form-group">
+            <span class="icons-sprite icons-id"></span>
+            <input type="text" id="sign-up-name" placeholder="请输入您的昵称">
+        </div>
+        <div class="form-group">
+            <span class="icons-sprite icons-phone"></span>
+            <input type="text" id="sign-up-phone" placeholder="请输入您的手机号">
+        </div>
+        <div class="form-group">
+            <span class="icons-sprite icons-password"></span>
+            <input type="password" id="sign-up-password" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <span class="icons-sprite icons-password"></span>
+            <input type="password" id="sign-up-password2" placeholder="请重复密码">
+        </div>
+        <div class="form-group box-form-tools">
+            <div class="label">
+                <input type="checkbox" checked name="" id="user-agreement">
+                <label for="user-agreement"></label>
+                <label for="user-agreement"> <a href="#" class="agreement-link">同意本网站《用户协议》</a></label>
+            </div>
+        </div>
+        <div class="form-group box-form-buttons">
+            <button type="button" ms-click="checkRegister">注册</button>
+            <a href="#" ms-click="closeSignDialog">取消</a>
+        </div>
+    </form>
+</div>

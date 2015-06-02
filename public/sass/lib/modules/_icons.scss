@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+@import "icons/*.png";
+@import "ft-icons/*.png";
+@import "maps-icons/*.png";
+
+@include all-icons-sprites;
+@include all-ft-icons-sprites;
+@include all-maps-icons-sprites;
+
+.maps-icons-sprite,
+.ft-icons-sprite,
+.icons-sprite {
+    @include inline-block;
+}

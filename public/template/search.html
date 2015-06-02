@@ -1,0 +1,69 @@
+<div class="search-container" ms-if="toggleSearch">
+    <!-- 文章、评论窗口 -->
+    <div class="light-box article-box" ms-controller="article" ms-if="toggleArticleDialog">
+        <div class="light-box-hd">
+            <a href="#" class="close" ms-click="handleArticleDialog(false)">×</a>
+        </div>
+        <div class="article-inner" ms-widget="scrollbar,artScroller,$articleScrollerOpt" data-scrollbar-position="right" data-scrollbar-show-bar-header="false">
+            <div class="article-content oni-scrollbar-scroller">
+                <div class="article-content-inner">
+                    <div class="article-default-style" ms-if="toggleArticle">
+                        {{articleContent|html}}
+                        <div ms-if="demoURL">
+                            <a class="btn-demo" href="{{demoURL}}" target="_blank"><span class="icons-sprite icons-pen"></span> 在线编制</a>
+                        </div>
+                    </div>
+                    <div ms-if="toggleComment">{{commentContent|html}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="article-box-tools" ms-if="showBoxTools">
+            <a href="javascript:void(0)" ms-click="toggleFavour"><span class="icons-sprite icons-thumb" ms-class="thumb-active:isFavoured"></span></a>
+            <a href="javascript:void(0)" ms-click="toggleStar"><span class="icons-sprite icons-star" ms-class="star-active:isStarred"></span></a>
+            <a href="javascript:void(0)" ms-if="!toggleComment" ms-click="handleComment(true)"><span class="icons-sprite icons-comment"></span></a>
+            <a href="javascript:void(0)" ms-if="toggleComment" ms-click="handleComment(false)"><span class="icons-sprite icons-back"></span></a>
+        </div>
+    </div>
+
+    <!-- 搜索窗口 -->
+    <div class="search-result article-list-box transparent-box">
+        <div class="search-result-hd transparent-box-hd">
+            <!-- <h3 class="title">{{searchPlaceholder}}</h3> -->
+
+            <div id="search-category" class="search-category">
+                <select ms-widget="dropdown,artCateDropdown,$artCateOpt" ms-duplex="cate">
+                    <option value="all">全部</option>
+                </select>
+            </div>
+
+            <div class="transparent-box-hd-tool">
+                <a href="/info" ms-click="showInfoList" target="_blank" style="padding: 0 .5em">查看更多</a>
+                <a href="#" class="close" ms-visible="!toggleSearchClose" ms-click="closeSearch">×</a>
+            </div>
+        </div>
+        <div ms-widget="scrollbar,srScroller,$srScrollerOpt" data-scrollbar-position="right" data-scrollbar-show-bar-header="false" class="search-result-bd transparent-box-bd">
+            <ul class="search-item-list item-list oni-scrollbar-scroller">
+                <li ms-repeat="data">
+                    <div class="mod clearfix">
+                        <div class="mod-sd">
+                            <a href="#" ms-attr-data-id="{{el.id}}" ms-click="clickArticleItem"><img ms-attr-src="{{el.thumbnail_url}}" ms-attr-alt="{{el.title}}" width="80" height="60"></a>
+                        </div>
+                        <div class="mod-mn">
+                            <div class="mod-hd">
+                                <h5>
+                                    <a href="#" ms-attr-data-id="{{el.id}}" ms-click="clickArticleItem" class=""><span class="item-tag" ms-if="el.category_name">{{el.category_name}}</span> <span class="title ellipsis">{{el.title}}</span></a>
+                                </h5>
+                            </div>
+                            <div class="mod-bd">
+                                <a href="#" ms-attr-data-id="{{el.id}}" ms-click="clickArticleItem">{{el.description}}</a>
+                            </div>
+                            <div class="mod-ft" ms-if="el.threads > 0">
+                                <a href="#" ms-attr-data-id="{{el.id}}" ms-click="clickArticleItem">{{el.threads}}跟帖</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

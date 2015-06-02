@@ -1,0 +1,39 @@
+.auth-dialog {
+    button {
+        width: 100%;
+        font-size: 18px;
+        line-height: 66px;
+        @include button-variant(#fff, $main-color, $main-color);
+    }
+    .avatar {
+        position: relative;
+        text-align: center;
+        &:after {
+            position: absolute;
+            content: "";
+            width: 32px;
+            height: 32px;
+            top: -14px;
+            right: 74px;
+            background: url(../images/logo_supdri_2.png) no-repeat center;
+        }
+        img {
+            border: 1px solid #02738b;
+        }
+    }
+    p {
+        text-align: center;
+        font-size: 14px;
+        line-height: 2em;
+        color: #808080;
+        &.username {
+            font-size: 22px;
+            line-height: 60px;
+            color: #111;
+        }
+    }
+}
+.auth-logo-1 {
+    margin: 12px auto 24px auto;
+    background: url(../images/logo_supdri_1.png) no-repeat center;
+}

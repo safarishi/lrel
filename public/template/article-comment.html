@@ -1,0 +1,26 @@
+<div class="comment-box">
+    <div class="comment-input comment-input-fixed">
+        <form method="post" ms-submit="postComment" class="comment-form">
+            <input type="text" id="comment-form-input" placeholder="您的评论">
+            <button type="submit">评论</button>
+        </form>
+    </div>
+    <div class="comment-list">
+        <ul>
+            <li class="mod" ms-repeat="commentData">
+                <a href="#" class="mod-sd"><img ms-attr-src="{{el.user_avatar}}" width="60" height="60" alt=""></a>
+                <div class="mod-mn">
+                    <div class="mod-hd">
+                        <div class="align-left">{{el.username}}</div>
+                        <div class="align-right">{{el.created_at}}</div>
+                    </div>
+                    <div class="mod-bd">
+                        <div class="mod-bd-content">
+                            {{el.content|html}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

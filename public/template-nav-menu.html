@@ -1,0 +1,43 @@
+<div class="nav-button nav-menu-button" ms-click="clickMenuBtn">
+    <span class="icons-sprite icons-menu"></span>
+</div>
+<nav class="nav-menu-tabs">
+    <ul>
+        <li ms-click-1="closeIndexMenuNav" ms-click-2="returnToHome">
+            <span class="icons-sprite icons-home"></span>
+            <div class="nav-menu-sub">
+                <a href="#" ms-click-1="closeIndexMenuNav" ms-click-2="returnToHome">首页</a>
+            </div>
+        </li>
+        <li ms-click-1="closeMenuNav" ms-click-2="renderPoints(1)">
+            <span class="icons-sprite icons-book"></span>
+            <div class="nav-menu-sub">
+                <a href="#" ms-click-1="closeMenuNav" ms-click-2="renderPoints(1)" data-notify="规划资讯" data-notify-level="1">规划资讯</a>
+            </div>
+        </li>
+        <li ms-click-1="closeMenuNav" ms-click-2="renderPoints(2)">
+            <span class="icons-sprite icons-plan"></span>
+            <div class="nav-menu-sub">
+                <a href="#" ms-click-1="closeMenuNav" ms-click-2="renderPoints(2)" data-notify="在线规划" data-notify-level="1">在线规划</a>
+                <ul ms-controller="planningcate">
+                    <li ms-repeat="categories" style="text-align:center"><a href="#" ms-attr-data-id="{{el.id}}" ms-click-1="closeMenuNav" ms-click-2="clickPlanningMenu" ms-attr-data-notify="{{el.name}}">{{el.name}}</a></li>
+                </ul>
+            </div>
+        </li>
+        <li ms-click-1="closeMenuNav"  ms-click-2="renderPoints(3)">
+            <span class="icons-sprite icons-comm"></span>
+            <div class="nav-menu-sub" style="width:220px;left:-220px;">
+                <a href="#" ms-click-1="closeMenuNav">互动交流</a>
+                <ul ms-controller="commcate">
+                    <li ms-repeat="categories" style="text-align:center" ms-attr-data-id="{{el.id}}" ms-click-1="closeMenuNav" ms-click-2="clickCommMenu" ms-attr-data-notify="{{el.name}}">{{el.name}}</li>
+                </ul>
+            </div>
+        </li>
+        <li ms-click-1="closeMenuNav">
+            <span class="icons-sprite icons-cart"></span>
+            <div class="nav-menu-sub">
+                <a href="#" onclick="alert('敬请期待！');" ms-click-1="closeMenuNav">规划商城</a>
+            </div>
+        </li>
+    </ul>
+</nav>

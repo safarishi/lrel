@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+// sign-dialog
+.sign-dialog {
+    .oni-dialog-inner .oni-dialog-content {
+        padding: 0 40px;
+    }
+    &-box {
+        .title {
+            font-size: 3rem;
+            line-height: 6rem;
+            text-align: center;
+            color: #111;
+        }
+    }
+}

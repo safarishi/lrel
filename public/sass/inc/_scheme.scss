@@ -1,0 +1,31 @@
+
+// colors
+$main-red: #ae0a0a;
+$light-red: #be1f1f;
+
+
+$main-blue: #0a91ae;
+$dark-blue: #0384a0;
+$light-blue: lighten($main-blue, 5%);
+
+
+$main-grey: #333;
+$light-grey: #494949;
+$border-grey: #d8d8d8;
+
+
+$main-black: #111;
+
+
+$main-color: $main-blue;
+$light-color: $light-blue;
+
+// nav-color
+$nav-tabs-color: $dark-blue;
+$nav-tabs-sub-color: lighten($dark-blue, 5%);
+
+// alert-color
+$alert-info-color: #1498e3;
+$alert-success-color: #14a81b;
+$alert-error-color: #e31422;
+$alert-warnning-color: #f39604;

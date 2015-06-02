@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+%box {
+    &-hd {
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        line-height: 44px;
+        &,
+        & a {
+            color: #fff;
+        }
+        .title {
+            padding: 0 18px;
+        }
+    }
+    a.close {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 20px;
+        margin-right: 6px;
+        color: #fff;
+    }
+}
+
+// main-box
+.main-box {
+    background: #fff;
+    border: 1px solid $main-color;
+    @extend %box;
+    &-hd {
+        background: $main-color;
+        @extend %box-hd;
+        &-tool a.back {
+            font-size: 16px;
+            padding: 0 10px;
+        }
+    }
+    .close {
+        background: $dark-blue;
+        &:hover {
+            background: lighten($dark-blue, 1%);
+        }
+    }
+}
+
+// dark-box
+.dark-box {
+    background: #fff;
+    border: 1px solid $light-grey;
+    @extend %box;
+    &-hd {
+        background: $light-grey;
+        @extend %box-hd;
+    }
+    .close {
+        background: $main-grey;
+        &:hover {
+            background: lighten($main-grey, 1%);
+        }
+    }
+}
+
+// light-box
+.light-box {
+    background: #fff;
+    @extend %box;
+    .close {
+        position: absolute;
+        top: 6px;
+        right: 0;
+        background: $main-color;
+        &:hover {
+            background: lighten($main-color, 1%);
+        }
+    }
+}
+
+.transparent-box {
+    background: transparent;
+    @extend %box;
+    &-hd {
+        background: rgba(#fff, .3);
+        @extend %box-hd;
+        a {
+            color: $main-black;
+        }
+    }
+    &-bd {
+        background: #fff;
+    }
+    a.close {
+        color: $main-black;
+    }
+}
+
+// chat-box
+.chat-box {
+    width: 320px;
+    .icons-group {
+        margin-right: 5px;
+    }
+}
+.footer-chat {
+    position: absolute;
+    right: -322px;
+    bottom: 0;
+    .chat-box-bd {
+        height: 350px;
+    }
+}
+
+// apply-box
+.apply-box {
+    background: #fff;
+    border: 1px solid $main-blue;
+    textarea {
+        width: 100%;
+        height: 260px;
+        padding: 16px;
+        font-size: 14px;
+        line-height: 2;
+        resize: none;
+        border: 0;
+        box-sizing: border-box;
+        color: #a5a5a5;
+        outline: 0;
+    }
+    .oni-dialog-close {
+        display: none;
+    }
+    .oni-dialog-title {
+        font-size: 18px;
+        line-height: 44px;
+        padding: 0 1em;
+        color: #fff;
+        background: $main-blue;
+    }
+    .oni-dialog-btns {
+        display: table;
+        width: 100%;
+        button {
+            box-sizing: border-box;
+            width: 50%;
+            height: 44px;
+            border: 0;
+            border-radius: 0;
+            color: #fff;
+        }
+    }
+    .oni-button .oni-button-text {
+        font-size: 18px;
+    }
+    .oni-button.oni-state-default {
+        background: $dark-blue;
+    }
+    .oni-button.oni-button-success {
+        background: $main-blue;
+    }
+}

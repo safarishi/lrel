@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.thread-box {
+    line-height: 1.8rem;
+    color: #191919;
+    &-hd {
+        text-align: center;
+        line-height: 32px;
+        border-bottom: 1px solid #e1e1e1;
+        .title {
+            font-size: 1.6rem;
+            color: $main-black;
+        }
+        .info {
+            font-size: 1.2rem;
+            color: #808080;
+        }
+    }
+    &-bd {
+        padding: 10px;
+    }
+}

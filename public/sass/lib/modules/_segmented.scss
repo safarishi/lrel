@@ -1,0 +1,30 @@
+.segmented-control {
+    ul {
+        display: flex;
+        justify-content: center;
+        font-size: 24px;
+        line-height: 70px;
+        color: $main-black;
+    }
+    li {
+        display: block;
+        flex: 1;
+        margin-left: 1px;
+        text-align: center;
+        background: #f8f8f8;
+        cursor: pointer;
+        border-bottom: 5px solid #d3d3d3;
+        &.active {
+            border-bottom: 5px solid $main-blue;
+        }
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+.segmented-item {
+    display: none;
+    &.active {
+        display: block;
+    }
+}

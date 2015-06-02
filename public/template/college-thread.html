@@ -1,0 +1,28 @@
+<div class="oni-scrollbar-scroller">
+    <ul class="thread-item-list item-list">
+        <li ms-repeat="threads">
+            <div class="mod clearfix">
+                <div class="mod-sd">
+                    <a href="#" ms-attr-data-id="{{el.id}}" ms-click="clickThreadItem"><img ms-attr-src={{el.thumbnail_url}} alt="{{el.title}}" height="60" width="80"></a>
+                </div>
+                <div class="mod-mn">
+                    <div class="mod-hd">
+                        <h5>
+                            <a href="#" ms-attr-data-id="{{el.id}}" ms-click="clickThreadItem"><span class="sticky-tag item-tag" ms-if="el.top > 0">置顶</span> <span class="title ellipsis">{{el.title}}</span></a>
+                        </h5>
+                    </div>
+                    <div class="mod-bd">
+                        {{el.description|html}}
+                    </div>
+                    <div class="mod-ft" ms-if="el.comment > 0">
+                        <a href="#">{{el.comment}}跟帖</a>
+                    </div>
+                </div>
+                <div class="mod-adm" ms-if="isGroupAdmin">
+                    <a class="thread-sticky thread-sticky-vertical" ms-if="+el.top === 0" ms-click="setThreadSticky(el.id, true)"><span class="icons-sprite icons-sticky"></span> 置顶</a>
+                    <a class="thread-sticky thread-sticky-vertical thread-sticky-cancel" ms-if="+el.top === 1" ms-click="setThreadSticky(el.id, false)">取消置顶</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

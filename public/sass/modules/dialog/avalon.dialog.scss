@@ -1,0 +1,72 @@
+@charset "utf-8";
+@import "../chameleon/oniui-theme";
+@import "../../inc/scheme";
+
+$uiname: "oni-dialog";
+.light-dialog {
+    position: absolute;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(#000, .3);
+    .#{$uiname}-inner {
+        box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        height: 100%;
+        .#{$uiname}-header {
+            background-color: #fff;
+            .#{$uiname}-close {
+                position: absolute;
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                text-align: center;
+                font-size: 20px;
+                font-weight: normal;
+                line-height: 20px;
+                color: #fff;
+                background: $main-color;
+                right: 6px;
+                top: 6px;
+                cursor: pointer;
+                z-index: 1;
+                &:hover {
+                    background: lighten($main-color, 5%);
+                }
+            }
+            .#{$uiname}-title {
+                display: none;
+            }
+        }
+        .#{$uiname}-content {
+            font-size: 12px;
+            padding: 17px 20px;
+        }
+        .#{$uiname}-footer {
+            display: none;
+        }
+    }
+}
+.#{$uiname}-layout {
+    display: none;
+    *position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    zoom: 1;
+    z-index: 1;
+}
+.light-dialog-with-title {
+    .#{$uiname}-inner {
+        .#{$uiname}-header {
+            border-bottom: 1px solid #e1e1e1;
+            .#{$uiname}-title {
+                display: block;
+                text-align: center;
+                font-size: 30px;
+                color: #111;
+                line-height: 66px;
+            }
+        }
+    }
+}

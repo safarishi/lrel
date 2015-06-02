@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.single-page-box {
+    font-size: 1.8rem;
+    line-height: 2;
+    padding: 40px;
+    border: 1px solid $border-grey;
+}
+
+.page-bg {
+    min-height: inherit !important;
+    background: url(../images/page_bg.jpg) no-repeat center bottom/cover;
+}
+.page-table {
+    height: 100%;
+    margin: 0 auto;
+}

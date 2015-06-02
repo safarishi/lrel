@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <title>规划院一个地球</title>
+</head>
+
+<script src="bower_components/avalon/avalon.js"></script>
+
+<div ms-controller="root">
+
+
+<div ms-include-src="'template-header.html'" data-include-replace="true"></div>
+<header ms-include-src="'template-header.html'"></header>
+
+
+
+</div>
+
+<script>
+require([
+    'avalon'
+], function(avalon){
+    avalon.define({
+        $id: 'root'
+    })
+})
+</script>

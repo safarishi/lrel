@@ -1,0 +1,179 @@
+@mixin general-color($lastIndex, $color) {
+    // &:nth-last-of-type(#{$lastIndex}) {
+    &:nth-last-of-type(#{$lastIndex}).active {
+        .pic {
+            color: $color;
+            border-color: $color;
+        }
+    }
+}
+$general-color-map: (
+    1: #9d9dde,
+    2: #a0cede,
+    3: #de9dd8,
+    4: #b5a3dc,
+    5: #de8f8f,
+    6: #fdc9af,
+    7: #fdd884,
+    8: #d5f4c7,
+    9: #f5f5dd,
+    10: #c3dea6,
+    11: #b8edeb,
+    12: #71d580,
+    13: #fdc758
+);
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?-4dttpn');
+    src:url('../fonts/icomoon.eot?#iefix-4dttpn') format('embedded-opentype'),
+    url('../fonts/icomoon.woff?-4dttpn') format('woff'),
+    url('../fonts/icomoon.ttf?-4dttpn') format('truetype'),
+    url('../fonts/icomoon.svg?-4dttpn#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.iconfont {
+    display: inline-block;
+    font-style:normal;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-shanghai:before {
+    font-family: 'icomoon';
+    content: "\f600";
+}
+.general-pic-box {
+    display: flex;
+    overflow: hidden;
+}
+.general-pic-hd,
+.general-pic-bd {
+    position: relative;
+    flex: 1;
+}
+.general-pic-hd {
+    max-width: 600px;
+    min-width: 360px;
+    margin-left: 50px;
+    &:after {
+        position: absolute;
+        bottom: 28px;
+        left: 240px;
+        content: url(../images/arrow_top.png) no-repeat center;
+    }
+}
+.general-pic-bd {
+    min-height: 780px;
+}
+.general-pic-list {
+    position: relative;
+    top: 260px;
+    display: flex;
+    flex-direction: column-reverse;
+    li {
+        position: relative;
+        margin-top: -400px;
+        margin-right: 124px;
+        text-align: center;
+        z-index: 1;
+        &:before {
+            position: absolute;
+            left: 216px;
+            content: "";
+            top: calc(50% - 17px);
+            width: 8px;
+            height: 8px;
+            background: #adadad;
+            border-radius: 8px;
+        }
+        &:after {
+            position: absolute;
+            top: calc(50% - 14px);
+            right: 1px;
+            content: "";
+            height: 1px;
+            // width: calc(100% - 124px - 100px);
+            width: calc(100% - 224px);
+            background: #adadad;
+        }
+        .pic {
+            position: relative;
+            width: 216px;
+            height: 444px;
+            border: 1px solid darken(#e5e5e5, 20%);
+            border-radius: 5px;
+            color: #e5e5e5;
+            transform: skew(110deg, 36deg) scale(.48, .18);
+            opacity: .6;
+        }
+        .title {
+            position: absolute;
+            line-height: 1;
+            right: -124px;
+            top: 194px;
+            width: 124px;
+            text-align: center;
+            padding: 5px 0;
+            border: 1px solid #adadad;
+            cursor: pointer;
+        }
+        &.active {
+            z-index: 2;
+            &:before,
+            &:after {
+                background: #0ca3cf;
+            }
+            .pic {
+                opacity: 1;
+            }
+            .title {
+                background-color: #0ca3cf;
+                border: 1px solid #0ca3cf;
+                color: #fff;
+            }
+        }
+        @each $idx in map-keys($general-color-map) {
+            @include general-color($idx, map-get($general-color-map, $idx));
+        }
+        &:first-child .pic {
+            background: url(../images/map.jpg) no-repeat center;
+        }
+    }
+    .icon-shanghai {
+        position: absolute;
+        top: 50%;
+        left: calc(50% - 6px);
+        right: 0;
+        bottom: 0;
+        width: 216px;
+        height: 444px;
+        font-size: 216px;
+        line-height: 444px;
+        transform: translate(-50%, -50%) skewY(-10deg) scaleY(1.5);
+    }
+}
+.general-content {
+    display: none;
+    padding: 20px 48px;
+    margin-left: 96px;
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+    font-size: 20px;
+    color: #2c2c2c;
+    background: #f6f6f6;
+    @at-root .active & {
+        display: block;
+    }
+    .title {
+        font-size: 24px;
+    }
+    .highlighted {
+        color: #0ca3cf;
+    }
+    .shrink-content {
+        max-width: 560px;
+    }
+}

@@ -1,0 +1,68 @@
+<div class="footer-hidden">
+    <section class="footer-controls">
+        <button type="button" class="user-control global-opacity" ms-click="clickUserBtn"><span class="icons-user"></span></button>
+        <button type="button" class="chat-control global-opacity" ms-if="toggleChatBtn" ms-click="handleChatBox(true)"><span class="icons-chat"></span></button>
+        <div class="footer-chat chat-box main-box" ms-if="toggleChatBox">
+            <div class="main-box-hd">
+                <h3 class="title">在线聊天</h3>
+                <div class="main-box-hd-tool">
+                    <span class="icons-sprite icons-group"></span>
+                    <a href="#" class="close" ms-click="handleChatBox(false)">×</a>
+                </div>
+            </div>
+            <div class="chat-box-bd">
+                <div class="chat">
+                        <!-- <div class="chat-item me">
+                            <div class="time">16:10</div>
+                        </div> -->
+                </div>
+                <div class="chat-editor">
+                    <form action="" class="chat-input" method="post">
+                        <textarea name="chat-text" class="chat-text" id="chat-text" style="height: 20px; overflow: hidden;" placeholder="写消息"></textarea>
+                        <button class="chat-submit" type="submit">+</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 搜索 -->
+    <section class="search" ms-controller="search" ms-class-1="search-is-open:toggleSearch">
+        <form class="search-form" method="get" ms-submit="preventDefault">
+            <input type="text" placeholder="请输入关键字搜索" id="search-form-input">
+            <button type="submit" title="搜索" ms-click-1="handleSearch" ms-click-2="closeMenuNav" class="global-opacity"><span class="icons-sprite icons-search"></span></button>
+        </form>
+    </section>
+    <!-- /搜索 -->
+</div>
+<div class="footer-bar">
+    <div class="footer-bar-left">
+        <img src="images/qxqy_logo.png" height="50" alt="">
+        <p class="global-opacity"> &copy; 2015 上海市城市规划建筑设计工程有限公司 上海数城网络信息有限公司</p>
+    </div>
+    <!-- if period slider -->
+    <div class="period-slider" ms-controller="period" ms-if="togglePeriod">
+        <nav class="period-slider-tabs">
+            <ul>
+                <li ms-click="handlePeriod(1)" ms-hover="hover" ms-class="active:currentPeriod === 1"><a href="javascript:void(0)"><span class="period-title">历史</span></a></li>
+                <li ms-click="handlePeriod(2)" ms-hover="hover" ms-class="active:currentPeriod === 2"><a href="javascript:void(0)"><span class="period-title">现状</span></a></li>
+                <li ms-click="handlePeriod(3)" ms-hover="hover" ms-class="active:currentPeriod === 3"><a href="javascript:void(0)"><span class="period-title">未来</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- /if -->
+    <div class="footer-tools">
+        <a href="#" title="手机浏览"><span class="ft-icons-sprite ft-icons-app"></span></a>
+        <a href="#" title="我要分享"><span class="ft-icons-sprite ft-icons-share"></span></a>
+        <a href="#" title="联系我们"><span class="ft-icons-sprite ft-icons-mail"></span></a>
+        <a href="statement.html" target="_blank" title="关于我们"><span class="ft-icons-sprite ft-icons-menu"></span></a>
+    </div>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?683628878bce1516191fbcc7a3e8d9af";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>

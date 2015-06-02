@@ -1,0 +1,83 @@
+<!-- 账户设置 -->
+<div class="light-dialog account-dialog light-dialog-with-title" ms-visible="isLoadingCompleted" ms-widget="dialog,accountDialog,$accountDialogOpt" data-dialog-toggle="false" data-dialog-width="880" ms-controller="account">
+    <a href="#" class="sign-out" ms-controller="user" ms-click="userSignOut">退出登录</a>
+    <div class="segmented-control">
+        <ul>
+            <li ms-class="active:activeTab == 0" ms-click="toggleActive(0)">修改密码</li>
+            <li ms-class="active:activeTab == 1" ms-click="toggleActive(1)">个人信息</li>
+        </ul>
+    </div>
+    <div class="segmented-content">
+        <div class="segmented-item reset-password" ms-class="active:activeTab == 0">
+            <form id="form-password" method="post" ms-submit="updatePassword" class="box-form box-form-sm">
+                <div class="form-group">
+                    <label>原密码：</label>
+                    <input name="curr_pwd" type="password">
+                </div>
+                <div class="form-group">
+                    <label>新密码：</label>
+                    <input name="new_pwd" type="password" placeholer="最小长度为6个字符">
+                </div>
+                <div class="form-group">
+                    <label>确认新密码：</label>
+                    <input name="new_pwd_confirmation" type="password">
+                </div>
+                <div class="box-form-buttons">
+                    <button type="submit">确认</button>
+                </div>
+            </form>
+        </div>
+        <div class="segmented-item profile" ms-class="active:activeTab == 1">
+            <form id="form-info" action="/api/user/info" method="post" enctype="multipart/form-data" name="form-info" ms-submit="updateInfo" class="box-form box-form-sm">
+                <div class="profile-box" ms-controller="user">
+                    <div class="mod-form">
+                        <div class="form-group">
+                            <label>昵称</label>
+                            <input name="username" type="text" ms-value="{{username}}">
+                        </div>
+                        <div class="form-group">
+                            <label>性别</label>
+                            <div class="labels">
+                                <div class="label">
+                                    <input type="radio" name="gender" id="gender-1" value="1" ms-checked="gender == 1">
+                                    <label for="gender-1"></label>
+                                    <label for="gender-1"> 男</label>
+                                </div>
+                                <div class="label">
+                                    <input type="radio" name="gender" id="gender-2" value="2" ms-checked="gender == 2">
+                                    <label for="gender-2"></label>
+                                    <label for="gender-2"> 女</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>工作单位</label>
+                            <input name="org" type="text" ms-value="{{org}}">
+                        </div>
+                        <div class="form-group">
+                            <label>职位</label>
+                            <input name="position" type="text" ms-value="{{position}}">
+                        </div>
+                        <div class="box-form-buttons">
+                            <button type="submit">确认</button>
+                        </div>
+                    </div>
+                    <div class="mod-avatar">
+                        <div class="form-group">
+                            <label>头像</label>
+                            <div class="avatar-box">
+                                <img id="upload-preview" ms-attr-src="{{avatar}}" width="180" height="180" alt="">
+                            </div>
+                        </div>
+                        <div class="box-form-buttons">
+                            <div class="file-uploader">
+                                <label for="upload-avatar">上传头像</label>
+                                <input name="avatar" id="upload-avatar" type="file">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
