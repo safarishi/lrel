@@ -83,15 +83,41 @@ class CommentApiController extends ApiController
      *
      * @return mixed
      */
-    public function show() {
-        $aid = intval(Input::get('aid'));
-
+    public function show($aid)
+    {
         $someComments = DB::table('comment')
             ->select('id', 'uid', 'content', 'created_at')
             ->where('aid', $aid)
             ->orderBy('created_at', 'desc')
             ->paginate(4);
 
+        $users = DB::table('users')
+            ->select('id', 'username', 'avatar')
+            ->get();
+
+        $favours = DB::table('favours')
+            ->select(DB::raw('comment_id, count(*) as comment_faour_nums'))
+            ->groupBy('comment_id')
+            ->get();
+
+        foreach ($users as $_v) {
+            foreach ($someComments as $_vv) {
+                if ($_vv->uid === $_v->id) {
+                    $_vv->user_name   = $_v->username;
+                    $_vv->user_avatar = $_v->avatar;
+                }
+            }
+        }
+
+        foreach ($favours as $_v) {
+            foreach ($someComments as $_vv) {
+                if ($_vv->id === $_v->comment_id) {
+                    // 评论被点赞的次数
+                    $_vv->nums = $_v->comment_faour_nums;
+                } else {
+                    $_vv->nums = 0;
+                }
+            }
         }
 
         // foreach ($someComments as $_v) {
