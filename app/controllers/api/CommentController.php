@@ -94,10 +94,16 @@ class CommentApiController extends ApiController
 
         }
 
+        // foreach ($someComments as $_v) {
         //     $user = User::find($_v->uid);
+        //     if (!$user) {
+        //         throw new ApiException;
+        //     }
         //     $_v->user_name       = $user->username;
         //     $_v->user_avatar     = $user->avatar;
         //     $_v->comment_favours = Favour::where('comment_id', $_v->id)->count();
+        // }
+
         return $someComments;
     }
 
