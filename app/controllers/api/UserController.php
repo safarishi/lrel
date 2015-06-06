@@ -16,12 +16,12 @@ class UserApiController extends ApiController
 
     private static $_validate = [
         'store' => [
-            'client_id' => 'required',
+            'client_id'     => 'required',
             'client_secret' => 'required',
-            'name' => 'required|unique:users,username',
-            'password' => 'required|min:6|confirmed',
-            'phone' => 'required|unique:users',
-            'email' => 'required|email|unique:users'
+            'name'          => 'required|unique:users,username',
+            'password'      => 'required|min:6|confirmed',
+            'phone'         => 'required|unique:users',
+            'email'         => 'required|email|unique:users'
         ],
     ];
 
@@ -41,7 +41,7 @@ class UserApiController extends ApiController
     public function store() {
         // 获取请求参数
         $email   = Input::get('email');
-        $name   = Input::get('name');
+        $name    = Input::get('name');
         $phone   = Input::get('phone');
         $raw_pwd = Input::get('password');
         DB::beginTransaction();
