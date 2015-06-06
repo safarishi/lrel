@@ -92,12 +92,12 @@ class CommentApiController extends ApiController
             ->orderBy('created_at', 'desc')
             ->paginate(4);
 
-        foreach($someComments as $_v) {
-            $_v->user_name       = User::find($_v->uid)->name;
-            $_v->user_avatar     = User::find($_v->uid)->avatar;
-            $_v->comment_favours = Favour::where('comment_id', $_v->id)->count();
         }
 
+        //     $user = User::find($_v->uid);
+        //     $_v->user_name       = $user->username;
+        //     $_v->user_avatar     = $user->avatar;
+        //     $_v->comment_favours = Favour::where('comment_id', $_v->id)->count();
         return $someComments;
     }
 
