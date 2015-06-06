@@ -54,6 +54,7 @@ class UserApiController extends ApiController
                 'avatar'     => '/statics/images/avatar/default.jpg',
                 // 存储创建时间
                 'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             )
         );
         if ($id) {
