@@ -94,43 +94,50 @@ class CommentApiController extends ApiController
         $users = DB::table('users')
             ->select('id', 'username', 'avatar')
             ->get();
-
+var_export($users);
         $favours = DB::table('favours')
             ->select(DB::raw('comment_id, count(*) as comment_faour_nums'))
             ->groupBy('comment_id')
             ->get();
 
-        foreach ($users as $_v) {
-            foreach ($someComments as $_vv) {
-                if ($_vv->uid === $_v->id) {
-                    $_vv->user_name   = $_v->username;
-                    $_vv->user_avatar = $_v->avatar;
-                }
-            }
-        }
-
-        foreach ($favours as $_v) {
-            foreach ($someComments as $_vv) {
-                if ($_vv->id === $_v->comment_id) {
-                    // 评论被点赞的次数
-                    $_vv->nums = $_v->comment_faour_nums;
-                } else {
-                    $_vv->nums = 0;
-                }
-            }
-        }
-
-        // foreach ($someComments as $_v) {
-        //     $user = User::find($_v->uid);
-        //     if (!$user) {
-        //         throw new ApiException;
+        // foreach ($users as $_v) {
+        //     foreach ($someComments as $_vv) {
+        //         if ($_vv->uid === $_v->id) {
+        //             $_vv->user_name   = $_v->username;
+        //             $_vv->user_avatar = $_v->avatar;
+        //         }
         //     }
-        //     $_v->user_name       = $user->username;
-        //     $_v->user_avatar     = $user->avatar;
-        //     $_v->comment_favours = Favour::where('comment_id', $_v->id)->count();
         // }
 
-        return $someComments;
+        // foreach ($favours as $_v) {
+        //     foreach ($someComments as $_vv) {
+        //         if ($_vv->id === $_v->comment_id) {
+        //             // 评论被点赞的次数
+        //             $_vv->nums = $_v->comment_faour_nums;
+        //         } else {
+        //             $_vv->nums = 0;
+        //         }
+        //     }
+        // }
+
+        //////////////////////////////////////////////////////////////////////////////
+        // foreach ($users->toArray() as $user and $favours->toArray() as $faour) { //
+        //////////////////////////////////////////////////////////////////////////////
+        // foreach ($users as $user, $favours as $faour) {
+        //     foreach ($someComments as $value) {
+        //         if ($value->uid === $user->id) {
+        //             $value->user_name = $user->username;
+        //             $value->user_avatar = $user->avatar;
+        //         }
+        //         if ($value->id === $favour->comment_id) {
+        //             $value->nums = $faour->comment_faour_nums;
+        //         } else {
+        //             $value->nums = 0;
+        //         }
+        //     }
+        // }
+
+        // return $someComments;
     }
 
     /**
