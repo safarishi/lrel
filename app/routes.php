@@ -20,8 +20,8 @@ Route::get('/', function()
 Route::group(array('prefix'=>'api'), function()
 {
     // 用户登陆
-    // Route::post('oauth/access-token', 'OAuthApiController@postAccessToken');
-    Route::post('oauth/access-token', array('after' => 'login_integral', 'uses' => 'OAuthApiController@postAccessToken'));
+    Route::post('oauth/access-token', 'OAuthApiController@postAccessToken');
+    // Route::post('oauth/access-token', array('after' => 'login_integral', 'uses' => 'OAuthApiController@postAccessToken'));
 
     Route::put('/user', 'UserApiController@update');
     Route::post('/user/info', 'UserApiController@update');
