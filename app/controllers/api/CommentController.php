@@ -1,7 +1,6 @@
 <?php
 
 use LucaDegasperi\OAuth2Server\Authorizer;
-use Rootant\Api\Exception\ApiException;
 
 class CommentApiController extends ApiController
 {
@@ -17,9 +16,6 @@ class CommentApiController extends ApiController
     }
 
     private static $_validate = [
-        'show' => [
-            'aid' => 'required',
-        ],
         'store' => [
             'aid'     => 'required',
             'content' => 'required',
