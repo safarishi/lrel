@@ -13,10 +13,8 @@
 
 Route::get('/', function()
 {
-    $user = User::find(116);
-    var_dump($user);
-    return 'laravel register and login demo:-'.date('Y-m-d H:i:s');
-    // return View::make('hello');
+    // safari.demo-laravel.com
+    return 'hello safari';
 });
 
 Route::group(array('prefix'=>'api'), function()
