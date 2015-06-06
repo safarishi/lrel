@@ -1,6 +1,6 @@
 <?php
-
 namespace Rootant\Api\Exception;
+
 use Symfony\Component\HttpFoundation\Request;
 
 class ApiException extends \Exception
