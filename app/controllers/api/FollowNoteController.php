@@ -29,14 +29,46 @@ class FollowNoteApiController extends ApiController
     /**
      * 回帖
      *
-     * @throws ApiException
+     * @param  int $note_id 帖子id
+     *
      * @throws ResourceNonExistentException
+     * @throws ApiException
      */
+    public function store($note_id)
     {
+        $uid = $this->authorizer->getResourceOwnerId();
+        // 获取请求参数
         $content = Input::get('content');
         // 判断是否为微大学群组成员
         $member_flag = NoteApiController::isGroupMember($uid, 1);
+        if ($member_flag !== 2) {
             throw new ResourceNonExistentException('对不起，您还不能进行评论操作');
+        }
+        // 手动开启一个事务
+        DB::beginTransaction();
+        try {
+            $fn = new FollowNote();
+            $fn->uid     = $uid;
+            $fn->pid     = $note_id;
+            $fn->content = $content;
+            $fn->save();
+
+            $note = Note::find($note_id);
+            $note->comment += 1;
+            $note->save();
+            // 提交事务
+            DB::commit();
+
+            $followNote = FollowNote::select('id','uid', 'created_at', 'content', 'pid')->find($fn->id);
+            $user = User::find($uid);
+            $followNote->username    = $user->username;
+            $followNote->user_avatar = $user->avatar;
+
+            return $followNote;
+        } catch (\Exception $e) {
+            // 回滚事务
+            DB::rollback();
+            throw new ApiException();
         }
     }
 
