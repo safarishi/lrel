@@ -114,6 +114,7 @@ return array(
         'reason'             => '申请理由',
         'content'            => '内容',
         'ic_group_id'        => '群组id',
+        'aid'                => '文章 id',
     ),
 
 );
