@@ -23,6 +23,20 @@ class StarApiController extends ApiController
      */
     public function store($aid)
     {
+        $uid  = $this->authorizer->getResourceOwnerId();
+        $data = DB::table('starred')
+            ->where('aid', $aid)
+            ->where('uid', $uid)
+            ->first();
+        if (!$data) {
+            $star = new Star();
+            $star->aid = $aid;
+            $star->uid = $uid;
+            $star->save();
+            $star->username = User::find($uid)->username;
+            // 返回数据
+            return $star;
+        }
     }
 
     /**
