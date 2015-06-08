@@ -119,6 +119,8 @@ class CommentApiController extends ApiController
                 }
             }
         }
+
+        return $someComments;
     }
 
     /**
