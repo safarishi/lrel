@@ -23,6 +23,8 @@ Route::group(array('prefix'=>'api'), function()
     Route::get('articles/{aid}/comments', 'CommentApiController@show');
     // 收藏文章
     Route::post('articles/{aid}/starred', 'StarApiController@store');
+    // 回帖
+    Route::post('notes/{note_id}/comments', 'FollowNoteApiController@store');
 
     // 用户登陆
     Route::post('oauth/access-token', 'OAuthApiController@postAccessToken');
