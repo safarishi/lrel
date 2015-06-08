@@ -91,10 +91,11 @@ class CommentApiController extends ApiController
             ->orderBy('created_at', 'desc')
             ->paginate(4);
 
-        $users = DB::table('users')
+        $users        = DB::table('users')
             ->select('id', 'username', 'avatar')
             ->get();
-        $favours = DB::table('favours')
+
+        $favours      = DB::table('favours')
             ->select(DB::raw('comment_id, count(*) as comment_faour_nums'))
             ->groupBy('comment_id')
             ->get();
