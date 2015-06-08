@@ -15,15 +15,14 @@ class FollowNoteApiController extends ApiController
     }
 
     private static $_validate = [
-        'store' => [
+        'store'  => [
             'content' => 'required',
+        ],
+        'show'   => [
             'pid'     => 'required',
         ],
-        'show' => [
-            'pid' => 'required',
-        ],
         'verify' => [
-            'flag' => 'required',
+            'flag'    => 'required',
         ],
     ];
 
