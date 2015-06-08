@@ -5,7 +5,8 @@ use LucaDegasperi\OAuth2Server\Authorizer;
 class StarApiController extends ApiController
 {
 
-    public function __construct(Authorizer $authorizer) {
+    public function __construct(Authorizer $authorizer)
+    {
         $this->authorizer = $authorizer;
         $this->beforeFilter('oauth');
         $this->beforeFilter('validation');
@@ -22,7 +23,8 @@ class StarApiController extends ApiController
      *
      * @return Star
      */
-    public function store() {
+    public function store()
+    {
         $uid = $this->authorizer->getResourceOwnerId();
         $aid = Input::get('aid');
         $star = new Star;
