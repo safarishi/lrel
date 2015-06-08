@@ -28,7 +28,7 @@ class FollowNoteApiController extends ApiController
     ];
 
     /**
-     * 发表评论（跟帖）
+     * 回帖
      *
      * @throws ApiException
      * @throws ResourceNonExistentException
