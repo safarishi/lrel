@@ -21,6 +21,8 @@ Route::group(array('prefix'=>'api'), function()
 {
     // 获得某一篇文章对应的所有评论
     Route::get('articles/{aid}/comments', 'CommentApiController@show');
+    // 收藏文章
+    Route::post('articles/{aid}/starred', 'StarApiController@store');
 
     // 用户登陆
     Route::post('oauth/access-token', 'OAuthApiController@postAccessToken');
