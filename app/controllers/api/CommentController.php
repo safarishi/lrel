@@ -100,6 +100,25 @@ class CommentApiController extends ApiController
             ->groupBy('comment_id')
             ->get();
 
+        foreach ($users as $_v) {
+            foreach ($someComments as $_vv) {
+                if ($_vv->uid === $_v->id) {
+                    $_vv->user_name   = $_v->username;
+                    $_vv->user_avatar = $_v->avatar;
+                }
+            }
+        }
+
+        foreach ($favours as $_v) {
+            foreach ($someComments as $_vv) {
+                if ($_vv->id === $_v->comment_id) {
+                    // 评论被点赞次数
+                    $_vv->nums = $_v->comment_faour_nums;
+                } else {
+                    $_vv->nums = 0;
+                }
+            }
+        }
     }
 
     /**
