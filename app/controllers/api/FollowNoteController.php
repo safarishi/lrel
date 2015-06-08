@@ -116,8 +116,9 @@ class FollowNoteApiController extends ApiController
     /**
      * 删除微大学某一篇帖子的某一条评论
      *
-     * @param $follow_note_id 评论id
+     * @param  $follow_note_id 评论id
      * @return mixed
+     *
      * @throws ResourceNonExistentException
      */
     public function del($follow_note_id)
