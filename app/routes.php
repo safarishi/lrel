@@ -19,7 +19,6 @@ Route::get('/', function()
 
 Route::group(array('prefix'=>'api'), function()
 {
-
     // 获得某一篇文章对应的所有评论
     Route::get('articles/{aid}/comments', 'CommentApiController@show');
 
